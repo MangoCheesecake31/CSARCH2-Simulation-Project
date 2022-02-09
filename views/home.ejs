@@ -6,6 +6,41 @@
 	<title> Home </title>
 	
 	<style>
+		#toggle {
+			visibility: hidden;
+			opacity: 0;
+			position: relative;
+			z-index: -1;
+		}
+		#toggle:checked ~ dialog {
+			display: block;
+		}
+		@-webkit-keyframes appear {
+			0% {
+			  opacity: 0;
+			  transform: translateY(-10px);
+			}
+		  }
+		  
+		@keyframes appear {
+			0% {
+			  opacity: 0;
+			  transform: translateY(-10px);
+			}
+		}
+		dialog {
+			-webkit-animation: appear 350ms ease-in 1;
+					animation: appear 350ms ease-in 1;
+			max-width: 500px;
+		}
+		label {
+			background: skyblue;
+			color: white;
+			padding: 0.5em 1em;
+			border-radius: 4px;
+			font: 3ch droid sans mono, consolas, monospace;
+			color:#0d324d;
+		}
 		div {
 			justify-content: center;
 			align-items: center;
@@ -14,14 +49,16 @@
 		}
 		h1 {
 			color: lightblue;
-			margin: 2em auto;
 			font: 5ch droid sans mono, consolas, monospace;
+		}
+		#16-digit-hex {
+			margin-top: 50px;
 		}
 		h2 {
 			color: lightblue;
 			font: 4ch droid sans mono, consolas, monospace;
 		}
-		input {
+		#hex-input{
 			display: block;
 			margin: 2em auto;
 			border: none;
@@ -31,7 +68,7 @@
 			font: 5ch droid sans mono, consolas, monospace;
 			letter-spacing: 0.5ch;
 		}
-		input:focus {
+		#hex-input{
 			outline: none;
 			color: dodgerblue;
 		}
@@ -133,6 +170,18 @@
 	</script>
 </head>
 <body style="background-color: #191970;" onload="toggle_hide_binary()">
+	<input type="checkbox" id="toggle">
+	<label for="toggle">About the authors</label>
+	<dialog>
+	  <p>
+		Group 8 <br><br>
+		Castro, Steven Jentyn <br>
+		Li, Roymaxson <br>
+		Rosima, Rayvhen Mico <br>
+		Saril, Dean Migz
+	  </p>
+	  <label for="toggle">Close</label>
+	</dialog>
 	<div>
 		<h1>IEEE-754 Decimal-64 Floating Point Translator</h1>
 		<div id="16-digit-hex">
