@@ -118,7 +118,6 @@ const Converter = {
 		return d1 + d2 + d3;
 	},
 
-
 	/*
 		@params		{string} 	combo 	- combinational component of a binary decimal
 		@params		{string} 	expcon 	- expo contiuation of a binary decimal 
@@ -133,7 +132,8 @@ const Converter = {
 			default:
 					if (combo.substring(0, 2) == '11') {				// 8-9 Case
 						var msd = '100' + combo[4];						// e
-						var exp =  combo[3] + combo[4] + expcon;		// c d
+						var exp =  combo[2] + combo[3] + expcon;		// c d
+						return [msd, exp];
 
 					} else {											// 0-7 Case
 						var msd = '0' + combo[2] + combo[3] + combo[4]; // c d e
@@ -141,17 +141,44 @@ const Converter = {
 						return [msd, exp];
 					}
 		}
+	},
+
+	/*
+		@params		{string} 	bin  	- combinational component of a binary decimal
+		@params 	{string}			
+		
+		Converts a given 64 bit decimal floating point to it's decimal equivalent
+	*/
+	convertFloatingPointDecimalToDecimal: (bin) => {
+		// Sign
+		var sig = (bin[0] == 0) ? '+' : '-';
+
+		// Most Significant Digit 
+		var val = Converter.convertCombinationToMSDAndExp(bin.substring(1, 6), bin.substring(6, 14));
+		var msd = Converter.convertBinaryToDecimal(val[0]);
+
+		// Exponent
+		var exp = parseInt(Converter.convertBinaryToDecimal(val[1]), 10) - 398;
+
+		// Coefficient Continuation
+		var cf1 = Converter.convertDPBCDToDecimal(bin.substring(14, 24));						
+		var cf2 = Converter.convertDPBCDToDecimal(bin.substring(24, 34));
+		var cf3 = Converter.convertDPBCDToDecimal(bin.substring(34, 44));
+		var cf4 = Converter.convertDPBCDToDecimal(bin.substring(44, 54));
+		var cf5 = Converter.convertDPBCDToDecimal(bin.substring(54, 64));
+
+		return sig + msd + cf1 + cf2 + cf3 + cf4 + cf5 + ' x10^' + exp;
 	}
 }
 
 module.exports = Converter;
 
-// Tests
-// console.log(Converter.convertDPBCDToDecimal('0010011001'));			// 119
-// console.log(Converter.convertDPBCDToDecimal('0001000100'));			// 044
-// console.log(Converter.convertDPBCDToDecimal('0011111111'));			// 999
-// console.log(Converter.convertDPBCDToDecimal('0000000001'));			// 001
-// console.log(Converter.convertDPBCDToDecimal('1001010110'));			// 456
-// console.log(Converter.convertDPBCDToDecimal('1111101000'));			// 768
+// console.log(Converter.convertFloatingPointDecimalToDecimal('0011111010001010101100010010100011100101011010111101001000100110'));
+// console.log(Converter.convertFloatingPointDecimalToDecimal('1110100111101011111001011000110100011100010111011110000010000000'));
 
-// console.log(Converter.convertCombinationToMSDAndExp('10111', '00010111'));
+// 0011111010001010101100010010100011100101011010111101001000100110 = 7531123456574426 x 10^20
+// 1110100111101011111001011000110100011100010111011110000010000000 = -8765432345678100 x 10-20
+
+
+
+
