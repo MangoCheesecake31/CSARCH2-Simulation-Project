@@ -35,6 +35,16 @@ function setDecimalFields(dec, AEI, B, C, F, G, J, K) {
 
 const Converter = {
 	/*
+		@params 	{string} 	hex
+		@returns 	{string}
+
+		Converts a Hexdecimal to it's binary string equivalent 
+	*/
+	convertHexToBinary: (hex) => {
+		return parseInt(hex, 16).toString(2);
+	},
+
+	/*
 		@params 	{integer} 	dec
 		@returns 	{string}
 
@@ -48,7 +58,7 @@ const Converter = {
 
 	/*
 		@params 	{string} 	bin
-		@returns 	{stroing}
+		@returns 	{string}
 	
 		Converts a binary string to it's decimal equivalent
 	*/
@@ -118,19 +128,3 @@ module.exports = Converter;
 // console.log(Converter.convertDPBCDToDecimal('0000000001'));			// 001
 // console.log(Converter.convertDPBCDToDecimal('1001010110'));			// 456
 // console.log(Converter.convertDPBCDToDecimal('1111101000'));			// 768
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
