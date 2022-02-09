@@ -116,6 +116,31 @@ const Converter = {
 		var d3 = Converter.convertBinaryToDecimal(dec.substring(8, 12));
 
 		return d1 + d2 + d3;
+	},
+
+
+	/*
+		@params		{string} 	combo 	- combinational component of a binary decimal
+		@params		{string} 	expcon 	- expo contiuation of a binary decimal 
+		@params 	{array}				-  
+		
+		Converts a given comboinational and exponent continuation to its non-compressed format
+	*/
+	convertCombinationToMSDAndExp: (combo, expcon) => {
+		switch (combo) {
+			case '11111': return ['NaN', '0'];
+			case '11110': return ['Inf', '0'];
+			default:
+					if (combo.substring(0, 2) == '11') {				// 8-9 Case
+						var msd = '100' + combo[4];						// e
+						var exp =  combo[3] + combo[4] + expcon;		// c d
+
+					} else {											// 0-7 Case
+						var msd = '0' + combo[2] + combo[3] + combo[4]; // c d e
+						var exp = combo[0] + combo[1] + expcon;			// a b
+						return [msd, exp];
+					}
+		}
 	}
 }
 
@@ -128,3 +153,5 @@ module.exports = Converter;
 // console.log(Converter.convertDPBCDToDecimal('0000000001'));			// 001
 // console.log(Converter.convertDPBCDToDecimal('1001010110'));			// 456
 // console.log(Converter.convertDPBCDToDecimal('1111101000'));			// 768
+
+// console.log(Converter.convertCombinationToMSDAndExp('10111', '00010111'));
