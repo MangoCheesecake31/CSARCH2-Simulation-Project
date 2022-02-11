@@ -12,8 +12,8 @@ function outputDecimalOfBinary(){
 
     console.log("Decimal Output: " + decimalOutput); //TODO: REMOVE
 
-    $('#output_message').text(decimalOutput);
-    $('#output_message').css("display", "block");
+    $('#output_message_flp').text(decimalOutput);
+    $('#output_message_flp').css("display", "block");
 }
 
 
@@ -106,13 +106,13 @@ function outputDecimalOfHex(){
 }
 
 function copyPaste(){
+
     document.getElementById('output_copypaste').onclick = function(){
         navigator.clipboard.writeText(document.getElementById('output_message').innerText)
         .then(function() {
             console.log('text copied')
         })
     }
-
 
 
 }
