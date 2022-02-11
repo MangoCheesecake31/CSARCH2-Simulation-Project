@@ -187,6 +187,30 @@
 
 			
 		}
+		function show_dropdown_hex(){
+				var dropdown = document.getElementById('choose_points')
+				var dropdown2 = document.getElementById('dropdown')
+				dropdown.style.display = 'inline';
+				dropdown2.style.display = 'inline';
+		}
+		function hide_dropdown_hex(){
+				var dropdown = document.getElementById('choose_points')
+				var dropdown2 = document.getElementById('dropdown')
+				dropdown.style.display = 'none';
+				dropdown2.style.display = 'none';
+		}
+		function show_dropdown_bin(){
+				var dropdown = document.getElementById('choose_points_bin')
+				var dropdown2 = document.getElementById('dropdown_bin')
+				dropdown.style.display = 'inline';
+				dropdown2.style.display = 'inline';
+		}
+		function hide_dropdown_bin(){
+				var dropdown = document.getElementById('choose_points_bin')
+				var dropdown2 = document.getElementById('dropdown_bin')
+				dropdown.style.display = 'none';
+				dropdown2.style.display = 'none';
+		}
 		
 	</script>
 </head>
@@ -209,9 +233,32 @@
 			<h2>16-digit Hex Input</h2>
 			<input value="3E74A3D14A3DD631" maxlength='16' placeholder='••••••••••••••••' id="hex-input"/>
 			<div>
-			<input type="radio" id="fixed_point" name="point"> <label style="color: white; font-size: 16px;">Fixed Point</label>
+			<input type="radio" id="fixed_point" name="point" onclick="show_dropdown_hex()"> <label style="color: white; font-size: 16px;">Fixed Point</label>
+			<label id="choose_points" style="color: white; font-size: 16px;display: none;">Choose Fixed Decimal Points:</label>
+			<select name="dropdown" id="dropdown" style="display: none;">
+			  <option value="1">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			  <option value="6">6</option>
+			  <option value="7">7</option>
+			  <option value="8">8</option>
+			  <option value="9">9</option>
+			  <option value="10">10</option>
+			  <option value="11">11</option>
+			  <option value="12">12</option>
+			  <option value="13">13</option>
+			  <option value="14">14</option>
+			  <option value="15">15</option>
+			  <option value="16">16</option>
+			  <option value="17">17</option>
+			  <option value="18">18</option>
+			  <option value="19">19</option>
+			  <option value="20">20</option>
+			</select>
 			<div></div>
-			<input type="radio" id="floating_point" name="point"> <label style="color: white; font-size: 16px;">Floating Point</label>
+			<input type="radio" id="floating_point" name="point" onclick="hide_dropdown_hex()"> <label style="color: white; font-size: 16px;">Floating Point</label>
 			</div>
 			<button class="btn-16-bit-hex" onclick="outputDecimalOfHex()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>
@@ -234,9 +281,32 @@
 				</div>
 			</div>
 			<div>
-				<input type="radio" id="fixed_point" name="point"> <label style="color: white; font-size: 16px;">Fixed Point</label>
+				<input type="radio" id="fixed_point_bin" name="point" onclick="show_dropdown_bin()"> <label style="color: white; font-size: 16px;">Fixed Point</label>
+				<label id="choose_points_bin" style="color: white; font-size: 16px;">Choose Fixed Decimal Points:</label>
+					<select name="dropdown" id="dropdown_bin" >
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					</select>
 				<div></div>
-				<input type="radio" id="floating_point" name="point"> <label style="color: white; font-size: 16px;">Floating Point</label>
+				<input type="radio" id="floating_point" name="point" onclick="hide_dropdown_bin()"> <label style="color: white; font-size: 16px;">Floating Point</label>
 				</div>
 			<button class="btn-64-bit-binary" onclick="outputDecimalOfBinary()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>
