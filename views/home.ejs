@@ -231,7 +231,7 @@
 		<h1>IEEE-754 Decimal-64 Floating Point Translator</h1>
 		<div id="16-digit-hex">
 			<h2>16-digit Hex Input</h2>
-			<input value="3E74A3D14A3DD631" maxlength='16' placeholder='••••••••••••••••' id="hex-input"/>
+			<input  maxlength='16' placeholder='••••••••••••••••' id="hex-input"/>
 			<div>
 			<input type="radio" id="fixed_point" name="point" onclick="show_dropdown_hex()"> <label style="color: white; font-size: 16px;">Fixed Point</label>
 			<label id="choose_points" style="color: white; font-size: 16px;display: none;">Choose Fixed Decimal Points:</label>
@@ -258,7 +258,7 @@
 			  <option value="20">20</option>
 			</select>
 			<div></div>
-			<input type="radio" id="floating_point" name="point" onclick="hide_dropdown_hex()"> <label style="color: white; font-size: 16px;">Floating Point</label>
+			<input type="radio" checked="checked" id="floating_point_hex" name="point" onclick="hide_dropdown_hex()"> <label style="color: white; font-size: 16px;">Floating Point</label>
 			</div>
 			<button class="btn-16-bit-hex" onclick="outputDecimalOfHex()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>
@@ -267,16 +267,16 @@
 			<div class="input-group mb-3">
 				<div class="row">
 					<div class="id">
-						<input value="0" maxlength="1" pattern="\d*" type="text" class="form-control" id="sign-bit" placeholder="Sign Bit" onkeypress="return onlyNumberKey(event)">
+						<input  maxlength="1" pattern="\d*" type="text" class="form-control" id="sign-bit" placeholder="Sign Bit" onkeypress="return onlyNumberKey(event)">
 					</div>
 					<div class="combination">
-						<input value="01111" maxlength="5" pattern="\d*" type="text" class="form-control" id="combination" placeholder="Combination Field" onkeypress="return onlyNumberKey(event)">
+						<input  maxlength="5" pattern="\d*" type="text" class="form-control" id="combination" placeholder="Combination Field" onkeypress="return onlyNumberKey(event)">
 					</div>
 					<div class="exponent">
-						<input value="10011101" maxlength="9" pattern="\d*" type="text" class="form-control" id="exponent" placeholder="Exponent Continuation" onkeypress="return onlyNumberKey(event)">
+						<input  maxlength="9" pattern="\d*" type="text" class="form-control" id="exponent" placeholder="Exponent Continuation" onkeypress="return onlyNumberKey(event)">
 					</div>
 					<div class="coefficient">
-						<input value="00101000111101000101001010001111011101011000110001" maxlength="54" type="text" class="form-control" id="coefficient" placeholder="Coefficient Continuation" onkeypress="return onlyNumberKey(event)">
+						<input  maxlength="54" type="text" class="form-control" id="coefficient" placeholder="Coefficient Continuation" onkeypress="return onlyNumberKey(event)">
 					</div>
 				</div>
 			</div>
@@ -306,7 +306,7 @@
 					<option value="20">20</option>
 					</select>
 				<div></div>
-				<input type="radio" id="floating_point" name="point" onclick="hide_dropdown_bin()"> <label style="color: white; font-size: 16px;">Floating Point</label>
+				<input type="radio" checked="checked" id="floating_point" name="point" onclick="hide_dropdown_bin()"> <label style="color: white; font-size: 16px;">Floating Point</label>
 				</div>
 			<button class="btn-64-bit-binary" onclick="outputDecimalOfBinary()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>

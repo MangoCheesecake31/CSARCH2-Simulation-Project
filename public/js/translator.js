@@ -1,19 +1,26 @@
 function outputDecimalOfBinary(){
-    var signBit = $('#sign-bit').val();
-    var combiField = $('#combination').val();
-    var expoField = $('#exponent').val();
-    var coefficient = $('#coefficient').val();
 
-    expoField = expoField.replace(/\s+/g, '');
-    coefficient = coefficient.replace(/\s+/g, '');
+    if(validateBinaryInput()){
+        var signBit = $('#sign-bit').val();
+        var combiField = $('#combination').val();
+        var expoField = $('#exponent').val();
+        var coefficient = $('#coefficient').val();
+
+        expoField = expoField.replace(/\s+/g, '');
+        coefficient = coefficient.replace(/\s+/g, '');
 
 
-    var decimalOutput = translateBinaryToDecimal(signBit, combiField, expoField, coefficient);
+        var decimalOutput = translateBinaryToDecimal(signBit, combiField, expoField, coefficient);
 
-    console.log("Decimal Output: " + decimalOutput); //TODO: REMOVE
+        if($('#fixed_point_bin').prop('checked')){
+           var decimalPlaces = parseInt($("#dropdown_bin :selected").val());
+           decimalOutput = Number.parseFloat(decimalOutput).toFixed(decimalPlaces);
+        }
+        console.log("Decimal Output: " + decimalOutput); //TODO: REMOVE
 
-    $('#output_message_flp').text(decimalOutput);
-    $('#output_message_flp').css("display", "block");
+        $('#output_message').text(decimalOutput);
+        $('#output_message').css("display", "block");
+    }
 }
 
 
@@ -73,35 +80,41 @@ function translateBinaryToDecimal(signBit, combiField, expoField, coefficient){
 
 function outputDecimalOfHex(){
 
-    var hexInput = $('#hex-input').val();
-    console.log("Hex input: " + hexInput);
-    var binaryInput = Converter.convertHexToBinary(hexInput);
-    var paddedBinary = binaryInput.padStart(64,'0');
+    if(validateHexInput()){
+        var hexInput = $('#hex-input').val();
+        console.log("Hex input: " + hexInput);
+        var binaryInput = Converter.convertHexToBinary(hexInput);
+        var paddedBinary = binaryInput.padStart(64,'0');
 
-    console.log("binaryInput: " + binaryInput);
-    console.log("paddedBinary: " + paddedBinary);
+        console.log("binaryInput: " + binaryInput);
+        console.log("paddedBinary: " + paddedBinary);
 
 
-    var signBit = paddedBinary[0];
-    var combiField = paddedBinary.slice(1,6);
-    var expoField = paddedBinary.slice(6,14);
-    var coefficient = paddedBinary.slice(14);
+        var signBit = paddedBinary[0];
+        var combiField = paddedBinary.slice(1,6);
+        var expoField = paddedBinary.slice(6,14);
+        var coefficient = paddedBinary.slice(14);
 
-    console.log("MSD: " + signBit + "/n"); //TODO: REMOVE
-    console.log("combiField: " + combiField + "/n"); //TODO: REMOVE
-    console.log("expoField: " + expoField + "/n"); //TODO: REMOVE
-    console.log("coefficient: " + coefficient + "/n"); //TODO: REMOVE
+        console.log("MSD: " + signBit + "/n"); //TODO: REMOVE
+        console.log("combiField: " + combiField + "/n"); //TODO: REMOVE
+        console.log("expoField: " + expoField + "/n"); //TODO: REMOVE
+        console.log("coefficient: " + coefficient + "/n"); //TODO: REMOVE
 
-    translateBinaryToDecimal(signBit,combiField,expoField,coefficient);
+        translateBinaryToDecimal(signBit,combiField,expoField,coefficient);
 
-     var decimalOutput = translateBinaryToDecimal(signBit, combiField, expoField, coefficient);
+         var decimalOutput = translateBinaryToDecimal(signBit, combiField, expoField, coefficient);
 
-     console.log("Decimal Output: " + decimalOutput); //TODO: REMOVE
+         console.log("Decimal Output: " + decimalOutput); //TODO: REMOVE
+
+
+         if($('#fixed_point').prop('checked')){
+            var decimalPlaces = parseInt($("#dropdown :selected").val());
+            decimalOutput = Number.parseFloat(decimalOutput).toFixed(decimalPlaces);
+         }
 
      $('#output_message').text(decimalOutput);
      $('#output_message').css("display", "block");
-     //document.getElementById('ouput_copypaste').style.display = 'block';
-     //$('ouput_copypaste').css("display", "block");
+     }
 
 }
 
@@ -113,8 +126,97 @@ function copyPaste(){
             console.log('text copied')
         })
     }
+}
+
+function validateHexInput(){
+    var hexInput =  $('#hex-input').val();
+    var inputLen = hexInput.length;
+
+    $('#output_message').css("display", "none");
+    if (inputLen < 16){
+      $('#output_message').text("Insufficient digits.");
+      $('#output_message').css("display", "block");
+      return false;
+    }
+    var binaryInput = Converter.convertHexToBinary(hexInput);
+    if(binaryInput.includes("NaN")){
+        $('#output_message').text("Invalid Hex Digits.");
+        $('#output_message').css("display", "block");
+        return false;
+    }
+    return true;
+}
+
+function validateBinaryInput(){
+    var signBit = $('#sign-bit').val();
+    var combiField = $('#combination').val();
+    var expoField = $('#exponent').val();
+    var coefficient = $('#coefficient').val();
+
+    expoField = expoField.replace(/\s+/g, '');
+    coefficient = coefficient.replace(/\s+/g, '');
+
+     console.log("signBit: " + signBit);
+     console.log("signBit: " + combiField);
+     console.log("signBit: " + expoField);
+     console.log("signBit: " + coefficient);
 
 
+    if(signBit.length < 1){
+         $('#output_message').text("Insufficient digits at Sign Bit");
+         $('#output_message').css("display", "block");
+         return false;
+    }
+    if(combiField.length < 5){
+         $('#output_message').text("Insufficient digits at Combination Field");
+         $('#output_message').css("display", "block");
+         return false;
+    }
+    if(expoField.length < 8){
+          $('#output_message').text("Insufficient digits at Exponent Continuation");
+          $('#output_message').css("display", "block");
+          return false;
+    }
+    if(coefficient.length < 50){
+          $('#output_message').text("Insufficient digits at Coefficient Continuation");
+          $('#output_message').css("display", "block");
+          return false;
+    }
+    if(!checkIfBinary(signBit)){
+          $('#output_message').text("Sign bit is not binary.");
+          $('#output_message').css("display", "block");
+          return false;
+    }
+    if(!checkIfBinary(combiField)){
+           $('#output_message').text("Combination Field is not binary.");
+           $('#output_message').css("display", "block");
+           return false;
+    }
+    if(!checkIfBinary(expoField)){
+           $('#output_message').text("Exponent Continuation is not binary.");
+           $('#output_message').css("display", "block");
+           return false;
+    }
+    if(!checkIfBinary(coefficient)){
+            $('#output_message').text("Coefficient Combination is not binary.");
+            $('#output_message').css("display", "block");
+            return false;
+    }
+
+    return true;
+}
+
+
+function checkIfBinary(str) {
+  let isBinary = false;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] == "0" || str[i] == "1") {
+      isBinary = true;
+    } else {
+      return false;
+    }
+  }
+  return isBinary;
 }
 
 
