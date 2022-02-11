@@ -8,9 +8,12 @@ const port = process.env.PORT;
 const app = express();
 
 // 	Routes & View Engine
+
+// 	Resource directories
 const routes = require('./routes/router');
 app.use(routes);
 app.set('view engine','ejs');
+app.use(express.static('public'));
 
 //	Listen
 app.listen(port, hostname, ()=> {
