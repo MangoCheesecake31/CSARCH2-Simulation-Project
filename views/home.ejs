@@ -8,7 +8,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<title> Home </title>
-	
+
+	<script type= "text/javascript" src="/js/bcd-indexes.js"></script>
+	<script type= "text/javascript" src="/js/converter.js"></script>
+	<script type= "text/javascript" src="/js/translator.js"></script>
 	<style>
 		#toggle {
 			visibility: hidden;
@@ -202,31 +205,31 @@
 		<h1>IEEE-754 Decimal-64 Floating Point Translator</h1>
 		<div id="16-digit-hex">
 			<h2>16-digit Hex Input</h2>
-			<input maxlength='16' placeholder='••••••••••••••••' id="hex-input"/>
-			<button class="btn-16-bit-hex" onclick="display_output" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
+			<input value="3E74A3D14A3DD631" maxlength='16' placeholder='••••••••••••••••' id="hex-input"/>
+			<button class="btn-16-bit-hex" onclick="outputDecimalOfHex()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>
 		<div id="64-bit-binary" style="display: none;">
 			<h2>64-bit Binary Input</h2>
 			<div class="input-group mb-3">
 				<div class="row">
 					<div class="id">
-						<input maxlength="1" type="text" class="form-control" placeholder="Sign Bit">
+						<input value="0" maxlength="1" type="text" class="form-control" id="sign-bit" placeholder="Sign Bit">
 					</div>
 					<div class="combination">
-						<input maxlength="5" type="text" class="form-control" placeholder="Combination Field">
+						<input value="01111" maxlength="5" type="text" class="form-control" id="combination" placeholder="Combination Field">
 					</div>
 					<div class="exponent">
-						<input maxlength="9" type="text" class="form-control" id="exponent" placeholder="Exponent Continuation">
+						<input value="10011101" maxlength="9" type="text" class="form-control" id="exponent" placeholder="Exponent Continuation">
 					</div>
 					<div class="coefficient">
-						<input maxlength="54" type="text" class="form-control" id="coefficient" placeholder="Coefficient Continuation">
+						<input value="00101000111101000101001010001111011101011000110001" maxlength="54" type="text" class="form-control" id="coefficient" placeholder="Coefficient Continuation">
 					</div>
 				</div>
 			</div>
-			<button class="btn-64-bit-binary" onclick="display_output" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
+			<button class="btn-64-bit-binary" onclick="outputDecimalOfBinary()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>
 		<p id="error_message" style="display: none;">Error: Invalid input</p>
-		<p id="output_message">Imma pretend this is the answer</p>
+		<p id="output_message" display="block">Imma pretend this is the answer</p>
 		<div id="row">
 			<button class="input-switch" id="switch-btn" style="color: rgba(255,255,255,0.5); font-size: 16px;">Switch to Bin Input</button>
 		</div>
