@@ -1,5 +1,3 @@
-const idx = require('./bcd-indexes.js');			// Index constants
-
 /*
 	Note: Code to replace and insert substrings inside a string
 	@params 	{integer} 	index 			- Index to replace
@@ -17,18 +15,18 @@ String.prototype.replaceAt = function(index, replacement) {
 function setDecimalFields(dec, AEI, B, C, F, G, J, K) {
 	var res = dec;
 
-	res = res.replaceAt(idx.A, AEI[0]);
-	res = res.replaceAt(idx.E, AEI[1]);
-	res = res.replaceAt(idx.I, AEI[2]);
+	res = res.replaceAt(Index.A, AEI[0]);
+	res = res.replaceAt(Index.E, AEI[1]);
+	res = res.replaceAt(Index.I, AEI[2]);
 
-	res = res.replaceAt(idx.B, B);
-	res = res.replaceAt(idx.C, C);
+	res = res.replaceAt(Index.B, B);
+	res = res.replaceAt(Index.C, C);
 
-	res = res.replaceAt(idx.F, F);
-	res = res.replaceAt(idx.G, G);
+	res = res.replaceAt(Index.F, F);
+	res = res.replaceAt(Index.G, G);
 
-	res = res.replaceAt(idx.J, J);
-	res = res.replaceAt(idx.K, K);
+	res = res.replaceAt(Index.J, J);
+	res = res.replaceAt(Index.K, K);
 
 	return res;
 }
@@ -80,30 +78,30 @@ const Converter = {
 		var dec = 'XXXXYYYYZZZZ';							// Decimal Output in Binary Representation	
 		
 		// D H M Case
-		dec = dec.replaceAt(idx.D, bcd[idx.R]);
-		dec = dec.replaceAt(idx.H, bcd[idx.U]);
-		dec = dec.replaceAt(idx.M, bcd[idx.Y]);
+		dec = dec.replaceAt(Index.D, bcd[Index.R]);
+		dec = dec.replaceAt(Index.H, bcd[Index.U]);
+		dec = dec.replaceAt(Index.M, bcd[Index.Y]);
 
 		// A E I Case
-		const case_id = bcd[idx.V] + bcd[idx.W] + bcd[idx.X];
+		const case_id = bcd[Index.V] + bcd[Index.W] + bcd[Index.X];
 
-		if (bcd[idx.V] == '0') {																							 			// Case 000 (AEI)
-			dec = setDecimalFields(dec, '000', bcd[idx.P], bcd[idx.Q], bcd[idx.S], bcd[idx.T], bcd[idx.W], bcd[idx.X]);
+		if (bcd[Index.V] == '0') {																							 			// Case 000 (AEI)
+			dec = setDecimalFields(dec, '000', bcd[Index.P], bcd[Index.Q], bcd[Index.S], bcd[Index.T], bcd[Index.W], bcd[Index.X]);
 		} else {
 			switch (case_id) {
-				case '100': dec = setDecimalFields(dec, '001', bcd[idx.P], bcd[idx.Q], bcd[idx.S], bcd[idx.T], '0', '0');				// Case 001 (AEI)
+				case '100': dec = setDecimalFields(dec, '001', bcd[Index.P], bcd[Index.Q], bcd[Index.S], bcd[Index.T], '0', '0');				// Case 001 (AEI)
 					break;
-				case '101': dec = setDecimalFields(dec, '010', bcd[idx.P], bcd[idx.Q], '0', '0', bcd[idx.S], bcd[idx.T]);				// Case 010 (AEI)
+				case '101': dec = setDecimalFields(dec, '010', bcd[Index.P], bcd[Index.Q], '0', '0', bcd[Index.S], bcd[Index.T]);				// Case 010 (AEI)
 					break;
-				case '110': dec = setDecimalFields(dec, '100', '0', '0', bcd[idx.S], bcd[idx.T], bcd[idx.P], bcd[idx.Q]);				// Case 100 (AEI)
+				case '110': dec = setDecimalFields(dec, '100', '0', '0', bcd[Index.S], bcd[Index.T], bcd[Index.P], bcd[Index.Q]);				// Case 100 (AEI)
 					break;
 				case '111':
-							switch(bcd[idx.S] + bcd[idx.T]) {
-								case '10': dec = setDecimalFields(dec, '011', bcd[idx.P], bcd[idx.Q], '0', '0', '0', '0');				// Case 011 (AEI)
+							switch(bcd[Index.S] + bcd[Index.T]) {
+								case '10': dec = setDecimalFields(dec, '011', bcd[Index.P], bcd[Index.Q], '0', '0', '0', '0');				// Case 011 (AEI)
 									break;
-								case '01': dec = setDecimalFields(dec, '101', '0', '0', bcd[idx.P], bcd[idx.Q], '0', '0');				// Case 101 (AEI)
+								case '01': dec = setDecimalFields(dec, '101', '0', '0', bcd[Index.P], bcd[Index.Q], '0', '0');				// Case 101 (AEI)
 									break;
-								case '00': dec = setDecimalFields(dec, '110', '0', '0', '0', '0', bcd[idx.P], bcd[idx.Q]);				// Case 110 (AEI)
+								case '00': dec = setDecimalFields(dec, '110', '0', '0', '0', '0', bcd[Index.P], bcd[Index.Q]);				// Case 110 (AEI)
 									break;
 								case '11': dec = setDecimalFields(dec, '111', '0', '0', '0', '0', '0', '0');							// Case 111 (AEI)
 									break;
@@ -128,7 +126,7 @@ const Converter = {
 	convertCombinationToMSDAndExp: (combo, expcon) => {
 		switch (combo) {
 			case '11111': return ['NaN', '0'];
-			case '11110': return ['Inf', '0'];
+			case '11110': return ['Infinity', '0'];
 			default:
 					if (combo.substring(0, 2) == '11') {				// 8-9 Case
 						var msd = '100' + combo[4];						// e
@@ -171,7 +169,8 @@ const Converter = {
 	}
 }
 
-module.exports = Converter;
+
+
 
 // console.log(Converter.convertFloatingPointDecimalToDecimal('0011111010001010101100010010100011100101011010111101001000100110'));
 // console.log(Converter.convertFloatingPointDecimalToDecimal('1110100111101011111001011000110100011100010111011110000010000000'));

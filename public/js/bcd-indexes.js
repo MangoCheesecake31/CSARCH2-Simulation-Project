@@ -26,8 +26,4 @@ const Index = {
 	Y: 9
 }
 
-module.exports = Index;
-
-
-
 
