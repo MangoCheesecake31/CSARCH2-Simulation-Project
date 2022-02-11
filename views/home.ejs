@@ -3,6 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<title> Home </title>
 	
 	<style>
@@ -34,7 +38,7 @@
 			max-width: 500px;
 		}
 		label {
-			background: skyblue;
+			background: #78909c;
 			color: white;
 			padding: 0.5em 1em;
 			border-radius: 4px;
@@ -55,6 +59,7 @@
 		h2 {
 			color: lightblue;
 			font: 4ch droid sans mono, consolas, monospace;
+			margin-bottom: 50px;
 		}
 		#hex-input{
 			display: block;
@@ -70,17 +75,17 @@
 			outline: none;
 			color: dodgerblue;
 		}
-		textarea {
-			font: 2ch droid sans mono, consolas, monospace;
-			display: block;
-			padding: 5px;
-			width: 20ch;
-			height: 10ch;
-			border: none;
-			font-size: 5ch;
+		.id {
+			width: 7.5%;
 		}
-		textarea:focus {
-			outline: 0;
+		.combination {
+			width: 14%;
+		}
+		.exponent {
+			width: 17%
+		}
+		.coefficient {
+			width: 480px;
 		}
 		.center {
 			margin: auto;
@@ -170,16 +175,18 @@
 				var p = document.getElementById("output_message");
 				p.style.display ="block";
 			}
-			var cleave = new Cleave('.input-binary', {
-				blocks: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+			var cleave = new Cleave('#exponent', {
+				blocks: [4, 4]
 			});
-
+			var cleave = new Cleave('#coefficient', {
+				blocks: [10, 10, 10, 10, 10]
+			});
 		}
 		
 	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body style="background-color: #191970;">
+<body style="background-color: #122832;">
 	<input type="checkbox" id="toggle">
 	<label for="toggle">About the authors</label>
 	<dialog>
@@ -201,8 +208,21 @@
 		</div>
 		<div id="64-bit-binary" style="display: none;">
 			<h2>64-bit Binary Input</h2>
-			<div class="center">
-				<textarea class="input-binary"></textarea>
+			<div class="input-group mb-3">
+				<div class="row">
+					<div class="id">
+						<input maxlength="1" type="text" class="form-control" placeholder="Sign Bit">
+					</div>
+					<div class="combination">
+						<input maxlength="5" type="text" class="form-control" placeholder="Combination Field">
+					</div>
+					<div class="exponent">
+						<input maxlength="9" type="text" class="form-control" id="exponent" placeholder="Exponent Continuation">
+					</div>
+					<div class="coefficient">
+						<input maxlength="54" type="text" class="form-control" id="coefficient" placeholder="Coefficient Continuation">
+					</div>
+				</div>
 			</div>
 			<button class="btn-64-bit-binary" onclick="display_output" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>
