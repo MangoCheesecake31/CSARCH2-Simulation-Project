@@ -17,5 +17,5 @@ app.use(express.static('public'));
 
 //	Listen
 app.listen(port, hostname, ()=> {
-	console.log(`Server is now running at http://${hostname}:${port}`);
+	console.log(`Server is now running at http://localhost:${port}`);
 });
