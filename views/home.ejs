@@ -211,7 +211,7 @@
 				dropdown.style.display = 'none';
 				dropdown2.style.display = 'none';
 		}
-		
+
 	</script>
 </head>
 <body style="background-color: #122832;">
@@ -267,13 +267,13 @@
 			<div class="input-group mb-3">
 				<div class="row">
 					<div class="id">
-						<input value="0" maxlength="1" type="text" class="form-control" id="sign-bit" placeholder="Sign Bit" onkeypress="return onlyNumberKey(event)">
+						<input value="0" maxlength="1" pattern="\d*" type="text" class="form-control" id="sign-bit" placeholder="Sign Bit" onkeypress="return onlyNumberKey(event)">
 					</div>
 					<div class="combination">
-						<input value="01111" maxlength="5" type="text" class="form-control" id="combination" placeholder="Combination Field" onkeypress="return onlyNumberKey(event)">
+						<input value="01111" maxlength="5" pattern="\d*" type="text" class="form-control" id="combination" placeholder="Combination Field" onkeypress="return onlyNumberKey(event)">
 					</div>
 					<div class="exponent">
-						<input value="10011101" maxlength="9" type="text" class="form-control" id="exponent" placeholder="Exponent Continuation" onkeypress="return onlyNumberKey(event)">
+						<input value="10011101" maxlength="9" pattern="\d*" type="text" class="form-control" id="exponent" placeholder="Exponent Continuation" onkeypress="return onlyNumberKey(event)">
 					</div>
 					<div class="coefficient">
 						<input value="00101000111101000101001010001111011101011000110001" maxlength="54" type="text" class="form-control" id="coefficient" placeholder="Coefficient Continuation" onkeypress="return onlyNumberKey(event)">
