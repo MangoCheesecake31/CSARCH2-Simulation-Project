@@ -39,7 +39,14 @@ const Converter = {
 		Converts a Hexdecimal to it's binary string equivalent 
 	*/
 	convertHexToBinary: (hex) => {
-		return parseInt(hex, 16).toString(2);
+
+        var accumulator = '';
+	    for(let i = 0; i < 16; i++){
+            var hexDigit = (parseInt(hex[i], 16).toString(2)).padStart(4,'0');
+	        accumulator = accumulator.concat(hexDigit);
+	    }
+	    return accumulator;
+
 	},
 
 	/*
