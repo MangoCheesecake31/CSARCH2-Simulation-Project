@@ -147,9 +147,6 @@
 		#switch_hex, #switch_binary {
 			display:inline;
 		}
-		#output_message {
-			display:none;
-		}
 	</style>
 	<script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
 	<script type="text/javascript">
@@ -229,7 +226,8 @@
 			<button class="btn-64-bit-binary" onclick="outputDecimalOfBinary()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Submit</button>
 		</div>
 		<p id="error_message" style="display: none;">Error: Invalid input</p>
-		<p id="output_message" display="block">Imma pretend this is the answer</p>
+		<p id="output_message" display="block"></p>
+		<button id="output_copypaste" onclick="copyPaste()" style="color: rgba(255,255,255,0.5); font-size: 16px;">Copy to Clipboard</button>
 		<div id="row">
 			<button class="input-switch" id="switch-btn" style="color: rgba(255,255,255,0.5); font-size: 16px;">Switch to Bin Input</button>
 		</div>

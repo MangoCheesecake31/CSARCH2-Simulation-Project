@@ -100,6 +100,20 @@ function outputDecimalOfHex(){
 
      $('#output_message').text(decimalOutput);
      $('#output_message').css("display", "block");
+     //document.getElementById('ouput_copypaste').style.display = 'block';
+     //$('ouput_copypaste').css("display", "block");
+
+}
+
+function copyPaste(){
+    document.getElementById('output_copypaste').onclick = function(){
+        navigator.clipboard.writeText(document.getElementById('output_message').innerText)
+        .then(function() {
+            console.log('text copied')
+        })
+    }
+
+
 
 }
 
